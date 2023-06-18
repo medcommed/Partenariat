@@ -1,0 +1,112 @@
+entity Commune(commune) {
+    nomCommuneAr String required unique maxlength(255),
+    nomCommuneFr String unique maxlength(255)
+}
+
+entity Convention(convention) {
+    aveanau String required maxlength(255),
+    dateDebutConv LocalDate required,
+    dureeConvention String required maxlength(255),
+    etatConvention String required maxlength(255),
+    nbrTranche Long required,
+    nomConvention String required maxlength(255),
+    objectif TextBlob required
+}
+
+entity DomaineProjet(domaine_projet) {
+    designationAr String required unique maxlength(255),
+    designationFr String unique maxlength(255),
+}
+
+entity Partenaire(partenaire) {
+    nomPartenaire String required maxlength(255),
+    tel String required,
+    email String required,
+}
+
+entity Projet(projet) {
+    nomProjet String required maxlength(255)
+    anneeProjet String required,
+    dateDebut LocalDate required,
+    dureeProjet String required,
+    montantProjet BigDecimal required,
+   
+}
+
+entity Province(province) {
+    libelleProvinceAr String required unique maxlength(255),
+    libelleProvinceFr String unique maxlength(255)
+}
+
+entity Region(region) {
+    libelleRegionAr String required unique maxlength(255),
+    libelleRegionFr String unique maxlength(255)
+}
+
+entity SituationProjet(situation_projet) {
+    dateStatutValid LocalDate required,
+    statutProjet String required
+}
+
+entity Tranche(tranche) {
+    nomTranche String required maxlength(255),
+    dateDeffet LocalDate required unique,
+    montantTranche BigDecimal required,
+    rapportTranche String required
+}
+
+entity TypeConvention(typeConvention) {
+    nomTypeAr String required unique maxlength(255),
+    nomTypeFr String unique maxlength(255)
+}
+
+// Relations
+relationship ManyToOne {
+    Commune{provinces(libelleProvinceAr)} to Province{commune(nomCommuneAr)}
+}
+
+relationship ManyToOne {
+    Convention{projet required} to Projet{convention}
+}
+
+relationship ManyToOne {
+    Convention{typeConvention required} to TypeConvention{convention}
+}
+
+// TODO This is a pure ManyToMany relation (delete me and decide owner side)
+relationship ManyToMany {
+    ConventionPartenaire{convention required} to Convention{conventionPartenaire}
+}
+
+// TODO This is a pure ManyToMany relation (delete me and decide owner side)
+relationship ManyToMany {
+    Convention{partenaire required} to Partenaire{conventionPartenaire}
+}
+
+relationship ManyToOne {
+    Projet{comune(nomCommuneAr)} to Commune{projet}
+}
+
+relationship ManyToOne {
+    Projet{domaineProjet(designationAr)} to DomaineProjet{projet}
+}
+
+relationship ManyToOne {
+    Province{region(libelleRegionAr)} to Region{province(libelleProvinceAr)}
+}
+
+relationship ManyToOne {
+    SituationProjet{projet required} to Projet{situationProjet}
+}
+
+relationship ManyToOne {
+    Tranche{projet required} to Projet{tranche(dateDeffet)}
+}
+
+// Options
+service * with serviceClass
+
+paginate * with pagination
+
+
+filter *
