@@ -1,0 +1,319 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-convention-heading"
+        data-cy="ConventionCreateUpdateHeading"
+        jhiTranslate="partenariatApp.convention.home.createOrEditLabel"
+      >
+        Create or edit a Convention
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="partenariatApp.convention.aveanau" for="field_aveanau">Aveanau</label>
+          <input type="text" class="form-control" name="aveanau" id="field_aveanau" data-cy="aveanau" formControlName="aveanau" />
+          <div *ngIf="editForm.get('aveanau')!.invalid && (editForm.get('aveanau')!.dirty || editForm.get('aveanau')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('aveanau')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              هذا الحقل مطلوب.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('aveanau')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 255 }"
+            >
+              هذا الحقل لا يمكن أن يكون أطول من 255 احرف.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="partenariatApp.convention.dateDebutConv" for="field_dateDebutConv">Date Debut Conv</label>
+          <div class="input-group">
+            <input
+              id="field_dateDebutConv"
+              data-cy="dateDebutConv"
+              type="text"
+              class="form-control"
+              name="dateDebutConv"
+              ngbDatepicker
+              #dateDebutConvDp="ngbDatepicker"
+              formControlName="dateDebutConv"
+            />
+            <button type="button" class="btn btn-secondary" (click)="dateDebutConvDp.toggle()">
+              <fa-icon icon="calendar-alt"></fa-icon>
+            </button>
+          </div>
+          <div
+            *ngIf="
+              editForm.get('dateDebutConv')!.invalid && (editForm.get('dateDebutConv')!.dirty || editForm.get('dateDebutConv')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('dateDebutConv')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              هذا الحقل مطلوب.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="partenariatApp.convention.dureeConvention" for="field_dureeConvention"
+            >Duree Convention</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="dureeConvention"
+            id="field_dureeConvention"
+            data-cy="dureeConvention"
+            formControlName="dureeConvention"
+          />
+          <div
+            *ngIf="
+              editForm.get('dureeConvention')!.invalid &&
+              (editForm.get('dureeConvention')!.dirty || editForm.get('dureeConvention')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('dureeConvention')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              هذا الحقل مطلوب.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('dureeConvention')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 255 }"
+            >
+              هذا الحقل لا يمكن أن يكون أطول من 255 احرف.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="partenariatApp.convention.etatConvention" for="field_etatConvention"
+            >Etat Convention</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="etatConvention"
+            id="field_etatConvention"
+            data-cy="etatConvention"
+            formControlName="etatConvention"
+          />
+          <div
+            *ngIf="
+              editForm.get('etatConvention')!.invalid && (editForm.get('etatConvention')!.dirty || editForm.get('etatConvention')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('etatConvention')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              هذا الحقل مطلوب.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('etatConvention')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 255 }"
+            >
+              هذا الحقل لا يمكن أن يكون أطول من 255 احرف.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="partenariatApp.convention.nbrTranche" for="field_nbrTranche">Nbr Tranche</label>
+          <input
+            type="number"
+            class="form-control"
+            name="nbrTranche"
+            id="field_nbrTranche"
+            data-cy="nbrTranche"
+            formControlName="nbrTranche"
+          />
+          <div *ngIf="editForm.get('nbrTranche')!.invalid && (editForm.get('nbrTranche')!.dirty || editForm.get('nbrTranche')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('nbrTranche')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              هذا الحقل مطلوب.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('nbrTranche')?.errors?.number"
+              jhiTranslate="entity.validation.number"
+            >
+              هذا الحقل يجب أن يكون رقم.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="partenariatApp.convention.nomConvention" for="field_nomConvention">Nom Convention</label>
+          <input
+            type="text"
+            class="form-control"
+            name="nomConvention"
+            id="field_nomConvention"
+            data-cy="nomConvention"
+            formControlName="nomConvention"
+          />
+          <div
+            *ngIf="
+              editForm.get('nomConvention')!.invalid && (editForm.get('nomConvention')!.dirty || editForm.get('nomConvention')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('nomConvention')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              هذا الحقل مطلوب.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('nomConvention')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 255 }"
+            >
+              هذا الحقل لا يمكن أن يكون أطول من 255 احرف.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="partenariatApp.convention.objectif" for="field_objectif">Objectif</label>
+          <textarea class="form-control" name="objectif" id="field_objectif" data-cy="objectif" formControlName="objectif"></textarea>
+          <div *ngIf="editForm.get('objectif')!.invalid && (editForm.get('objectif')!.dirty || editForm.get('objectif')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('objectif')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              هذا الحقل مطلوب.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="partenariatApp.convention.projet" for="field_projet">Projet</label>
+          <select
+            class="form-control"
+            id="field_projet"
+            data-cy="projet"
+            name="projet"
+            formControlName="projet"
+            [compareWith]="compareProjet"
+          >
+            <option *ngIf="editForm.get(['projet'])!.value == null" [ngValue]="null" selected></option>
+            <option [ngValue]="projetOption" *ngFor="let projetOption of projetsSharedCollection">{{ projetOption.id }}</option>
+          </select>
+        </div>
+        <div *ngIf="editForm.get(['projet'])!.invalid && (editForm.get(['projet'])!.dirty || editForm.get(['projet'])!.touched)">
+          <small class="form-text text-danger" *ngIf="editForm.get(['projet'])?.errors?.required" jhiTranslate="entity.validation.required">
+            هذا الحقل مطلوب.
+          </small>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="partenariatApp.convention.typeConvention" for="field_typeConvention"
+            >Type Convention</label
+          >
+          <select
+            class="form-control"
+            id="field_typeConvention"
+            data-cy="typeConvention"
+            name="typeConvention"
+            formControlName="typeConvention"
+            [compareWith]="compareTypeConvention"
+          >
+            <option *ngIf="editForm.get(['typeConvention'])!.value == null" [ngValue]="null" selected></option>
+            <option [ngValue]="typeConventionOption" *ngFor="let typeConventionOption of typeConventionsSharedCollection">
+              {{ typeConventionOption.id }}
+            </option>
+          </select>
+        </div>
+        <div
+          *ngIf="
+            editForm.get(['typeConvention'])!.invalid &&
+            (editForm.get(['typeConvention'])!.dirty || editForm.get(['typeConvention'])!.touched)
+          "
+        >
+          <small
+            class="form-text text-danger"
+            *ngIf="editForm.get(['typeConvention'])?.errors?.required"
+            jhiTranslate="entity.validation.required"
+          >
+            هذا الحقل مطلوب.
+          </small>
+        </div>
+
+        <div class="row mb-3">
+          <label jhiTranslate="partenariatApp.convention.partenaire" for="field_partenaires">Partenaire</label>
+          <select
+            class="form-control"
+            id="field_partenaires"
+            data-cy="partenaire"
+            multiple
+            name="partenaires"
+            formControlName="partenaires"
+            [compareWith]="comparePartenaire"
+          >
+            <option [ngValue]="partenaireOption" *ngFor="let partenaireOption of partenairesSharedCollection">
+              {{ partenaireOption.id }}
+            </option>
+          </select>
+        </div>
+        <div
+          *ngIf="editForm.get(['partenaires'])!.invalid && (editForm.get(['partenaires'])!.dirty || editForm.get(['partenaires'])!.touched)"
+        >
+          <small
+            class="form-text text-danger"
+            *ngIf="editForm.get(['partenaires'])?.errors?.required"
+            jhiTranslate="entity.validation.required"
+          >
+            هذا الحقل مطلوب.
+          </small>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">الغاء</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">حفظ</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

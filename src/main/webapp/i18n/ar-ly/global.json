@@ -7,6 +7,16 @@
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
       "entities": {
         "main": "الكيانات",
+        "commune": "Commune",
+        "convention": "Convention",
+        "domaineProjet": "Domaine Projet",
+        "partenaire": "Partenaire",
+        "projet": "Projet",
+        "province": "Province",
+        "region": "Region",
+        "situationProjet": "Situation Projet",
+        "tranche": "Tranche",
+        "typeConvention": "Type Convention",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

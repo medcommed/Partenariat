@@ -1,0 +1,28 @@
+<form *ngIf="situationProjet" name="deleteForm" (ngSubmit)="confirmDelete(situationProjet.id!)">
+  <div class="modal-header">
+    <h4 class="modal-title" data-cy="situationProjetDeleteDialogHeading" jhiTranslate="entity.delete.title">تأكيد عملية الحذف</h4>
+
+    <button type="button" class="btn-close" data-dismiss="modal" aria-hidden="true" (click)="cancel()">&times;</button>
+  </div>
+
+  <div class="modal-body">
+    <jhi-alert-error></jhi-alert-error>
+    <p
+      id="jhi-delete-situationProjet-heading"
+      jhiTranslate="partenariatApp.situationProjet.delete.question"
+      [translateValues]="{ id: situationProjet.id }"
+    >
+      Are you sure you want to delete Situation Projet {{ situationProjet.id }}?
+    </p>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancel()">
+      <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">الغاء</span>
+    </button>
+
+    <button id="jhi-confirm-delete-situationProjet" data-cy="entityConfirmDeleteButton" type="submit" class="btn btn-danger">
+      <fa-icon icon="times"></fa-icon>&nbsp;<span jhiTranslate="entity.action.delete">حذف</span>
+    </button>
+  </div>
+</form>

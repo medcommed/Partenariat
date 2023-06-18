@@ -1,0 +1,116 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-province-heading" data-cy="ProvinceCreateUpdateHeading" jhiTranslate="partenariatApp.province.home.createOrEditLabel">
+        Create or edit a Province
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="partenariatApp.province.libelleProvinceAr" for="field_libelleProvinceAr"
+            >Libelle Province Ar</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="libelleProvinceAr"
+            id="field_libelleProvinceAr"
+            data-cy="libelleProvinceAr"
+            formControlName="libelleProvinceAr"
+          />
+          <div
+            *ngIf="
+              editForm.get('libelleProvinceAr')!.invalid &&
+              (editForm.get('libelleProvinceAr')!.dirty || editForm.get('libelleProvinceAr')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('libelleProvinceAr')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              هذا الحقل مطلوب.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('libelleProvinceAr')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 255 }"
+            >
+              هذا الحقل لا يمكن أن يكون أطول من 255 احرف.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="partenariatApp.province.libelleProvinceFr" for="field_libelleProvinceFr"
+            >Libelle Province Fr</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="libelleProvinceFr"
+            id="field_libelleProvinceFr"
+            data-cy="libelleProvinceFr"
+            formControlName="libelleProvinceFr"
+          />
+          <div
+            *ngIf="
+              editForm.get('libelleProvinceFr')!.invalid &&
+              (editForm.get('libelleProvinceFr')!.dirty || editForm.get('libelleProvinceFr')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('libelleProvinceFr')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 255 }"
+            >
+              هذا الحقل لا يمكن أن يكون أطول من 255 احرف.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="partenariatApp.province.region" for="field_region">Region</label>
+          <select
+            class="form-control"
+            id="field_region"
+            data-cy="region"
+            name="region"
+            formControlName="region"
+            [compareWith]="compareRegion"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="regionOption" *ngFor="let regionOption of regionsSharedCollection">
+              {{ regionOption.libelleRegionAr }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">الغاء</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">حفظ</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

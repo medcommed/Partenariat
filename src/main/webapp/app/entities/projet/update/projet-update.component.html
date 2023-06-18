@@ -1,0 +1,190 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-projet-heading" data-cy="ProjetCreateUpdateHeading" jhiTranslate="partenariatApp.projet.home.createOrEditLabel">
+        Create or edit a Projet
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="partenariatApp.projet.nomProjet" for="field_nomProjet">Nom Projet</label>
+          <input type="text" class="form-control" name="nomProjet" id="field_nomProjet" data-cy="nomProjet" formControlName="nomProjet" />
+          <div *ngIf="editForm.get('nomProjet')!.invalid && (editForm.get('nomProjet')!.dirty || editForm.get('nomProjet')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('nomProjet')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              هذا الحقل مطلوب.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('nomProjet')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 255 }"
+            >
+              هذا الحقل لا يمكن أن يكون أطول من 255 احرف.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="partenariatApp.projet.anneeProjet" for="field_anneeProjet">Annee Projet</label>
+          <input
+            type="text"
+            class="form-control"
+            name="anneeProjet"
+            id="field_anneeProjet"
+            data-cy="anneeProjet"
+            formControlName="anneeProjet"
+          />
+          <div *ngIf="editForm.get('anneeProjet')!.invalid && (editForm.get('anneeProjet')!.dirty || editForm.get('anneeProjet')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('anneeProjet')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              هذا الحقل مطلوب.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="partenariatApp.projet.dateDebut" for="field_dateDebut">Date Debut</label>
+          <div class="input-group">
+            <input
+              id="field_dateDebut"
+              data-cy="dateDebut"
+              type="text"
+              class="form-control"
+              name="dateDebut"
+              ngbDatepicker
+              #dateDebutDp="ngbDatepicker"
+              formControlName="dateDebut"
+            />
+            <button type="button" class="btn btn-secondary" (click)="dateDebutDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+          </div>
+          <div *ngIf="editForm.get('dateDebut')!.invalid && (editForm.get('dateDebut')!.dirty || editForm.get('dateDebut')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('dateDebut')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              هذا الحقل مطلوب.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="partenariatApp.projet.dureeProjet" for="field_dureeProjet">Duree Projet</label>
+          <input
+            type="text"
+            class="form-control"
+            name="dureeProjet"
+            id="field_dureeProjet"
+            data-cy="dureeProjet"
+            formControlName="dureeProjet"
+          />
+          <div *ngIf="editForm.get('dureeProjet')!.invalid && (editForm.get('dureeProjet')!.dirty || editForm.get('dureeProjet')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('dureeProjet')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              هذا الحقل مطلوب.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="partenariatApp.projet.montantProjet" for="field_montantProjet">Montant Projet</label>
+          <input
+            type="number"
+            class="form-control"
+            name="montantProjet"
+            id="field_montantProjet"
+            data-cy="montantProjet"
+            formControlName="montantProjet"
+          />
+          <div
+            *ngIf="
+              editForm.get('montantProjet')!.invalid && (editForm.get('montantProjet')!.dirty || editForm.get('montantProjet')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('montantProjet')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              هذا الحقل مطلوب.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('montantProjet')?.errors?.number"
+              jhiTranslate="entity.validation.number"
+            >
+              هذا الحقل يجب أن يكون رقم.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="partenariatApp.projet.comune" for="field_comune">Comune</label>
+          <select
+            class="form-control"
+            id="field_comune"
+            data-cy="comune"
+            name="comune"
+            formControlName="comune"
+            [compareWith]="compareCommune"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="communeOption" *ngFor="let communeOption of communesSharedCollection">
+              {{ communeOption.nomCommuneAr }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="partenariatApp.projet.domaineProjet" for="field_domaineProjet">Domaine Projet</label>
+          <select
+            class="form-control"
+            id="field_domaineProjet"
+            data-cy="domaineProjet"
+            name="domaineProjet"
+            formControlName="domaineProjet"
+            [compareWith]="compareDomaineProjet"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="domaineProjetOption" *ngFor="let domaineProjetOption of domaineProjetsSharedCollection">
+              {{ domaineProjetOption.designationAr }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">الغاء</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">حفظ</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

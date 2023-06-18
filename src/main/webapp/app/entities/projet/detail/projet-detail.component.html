@@ -1,0 +1,60 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="projet">
+      <h2 data-cy="projetDetailsHeading"><span jhiTranslate="partenariatApp.projet.detail.title">Projet</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ projet.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="partenariatApp.projet.nomProjet">Nom Projet</span></dt>
+        <dd>
+          <span>{{ projet.nomProjet }}</span>
+        </dd>
+        <dt><span jhiTranslate="partenariatApp.projet.anneeProjet">Annee Projet</span></dt>
+        <dd>
+          <span>{{ projet.anneeProjet }}</span>
+        </dd>
+        <dt><span jhiTranslate="partenariatApp.projet.dateDebut">Date Debut</span></dt>
+        <dd>
+          <span>{{ projet.dateDebut | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="partenariatApp.projet.dureeProjet">Duree Projet</span></dt>
+        <dd>
+          <span>{{ projet.dureeProjet }}</span>
+        </dd>
+        <dt><span jhiTranslate="partenariatApp.projet.montantProjet">Montant Projet</span></dt>
+        <dd>
+          <span>{{ projet.montantProjet }}</span>
+        </dd>
+        <dt><span jhiTranslate="partenariatApp.projet.comune">Comune</span></dt>
+        <dd>
+          <div *ngIf="projet.comune">
+            <a [routerLink]="['/commune', projet.comune.id, 'view']">{{ projet.comune.nomCommuneAr }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="partenariatApp.projet.domaineProjet">Domaine Projet</span></dt>
+        <dd>
+          <div *ngIf="projet.domaineProjet">
+            <a [routerLink]="['/domaine-projet', projet.domaineProjet.id, 'view']">{{ projet.domaineProjet.designationAr }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">رجوع</span>
+      </button>
+
+      <button type="button" [routerLink]="['/projet', projet.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">تعديل</span>
+      </button>
+    </div>
+  </div>
+</div>

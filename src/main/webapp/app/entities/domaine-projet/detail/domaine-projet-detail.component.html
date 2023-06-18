@@ -1,0 +1,36 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="domaineProjet">
+      <h2 data-cy="domaineProjetDetailsHeading"><span jhiTranslate="partenariatApp.domaineProjet.detail.title">Domaine Projet</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ domaineProjet.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="partenariatApp.domaineProjet.designationAr">Designation Ar</span></dt>
+        <dd>
+          <span>{{ domaineProjet.designationAr }}</span>
+        </dd>
+        <dt><span jhiTranslate="partenariatApp.domaineProjet.designationFr">Designation Fr</span></dt>
+        <dd>
+          <span>{{ domaineProjet.designationFr }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">رجوع</span>
+      </button>
+
+      <button type="button" [routerLink]="['/domaine-projet', domaineProjet.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">تعديل</span>
+      </button>
+    </div>
+  </div>
+</div>

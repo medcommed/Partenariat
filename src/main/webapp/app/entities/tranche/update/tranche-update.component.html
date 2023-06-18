@@ -1,0 +1,166 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-tranche-heading" data-cy="TrancheCreateUpdateHeading" jhiTranslate="partenariatApp.tranche.home.createOrEditLabel">
+        Create or edit a Tranche
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="partenariatApp.tranche.nomTranche" for="field_nomTranche">Nom Tranche</label>
+          <input
+            type="text"
+            class="form-control"
+            name="nomTranche"
+            id="field_nomTranche"
+            data-cy="nomTranche"
+            formControlName="nomTranche"
+          />
+          <div *ngIf="editForm.get('nomTranche')!.invalid && (editForm.get('nomTranche')!.dirty || editForm.get('nomTranche')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('nomTranche')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              هذا الحقل مطلوب.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('nomTranche')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 255 }"
+            >
+              هذا الحقل لا يمكن أن يكون أطول من 255 احرف.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="partenariatApp.tranche.dateDeffet" for="field_dateDeffet">Date Deffet</label>
+          <div class="input-group">
+            <input
+              id="field_dateDeffet"
+              data-cy="dateDeffet"
+              type="text"
+              class="form-control"
+              name="dateDeffet"
+              ngbDatepicker
+              #dateDeffetDp="ngbDatepicker"
+              formControlName="dateDeffet"
+            />
+            <button type="button" class="btn btn-secondary" (click)="dateDeffetDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+          </div>
+          <div *ngIf="editForm.get('dateDeffet')!.invalid && (editForm.get('dateDeffet')!.dirty || editForm.get('dateDeffet')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('dateDeffet')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              هذا الحقل مطلوب.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="partenariatApp.tranche.montantTranche" for="field_montantTranche">Montant Tranche</label>
+          <input
+            type="number"
+            class="form-control"
+            name="montantTranche"
+            id="field_montantTranche"
+            data-cy="montantTranche"
+            formControlName="montantTranche"
+          />
+          <div
+            *ngIf="
+              editForm.get('montantTranche')!.invalid && (editForm.get('montantTranche')!.dirty || editForm.get('montantTranche')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('montantTranche')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              هذا الحقل مطلوب.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('montantTranche')?.errors?.number"
+              jhiTranslate="entity.validation.number"
+            >
+              هذا الحقل يجب أن يكون رقم.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="partenariatApp.tranche.rapportTranche" for="field_rapportTranche">Rapport Tranche</label>
+          <input
+            type="text"
+            class="form-control"
+            name="rapportTranche"
+            id="field_rapportTranche"
+            data-cy="rapportTranche"
+            formControlName="rapportTranche"
+          />
+          <div
+            *ngIf="
+              editForm.get('rapportTranche')!.invalid && (editForm.get('rapportTranche')!.dirty || editForm.get('rapportTranche')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('rapportTranche')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              هذا الحقل مطلوب.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="partenariatApp.tranche.projet" for="field_projet">Projet</label>
+          <select
+            class="form-control"
+            id="field_projet"
+            data-cy="projet"
+            name="projet"
+            formControlName="projet"
+            [compareWith]="compareProjet"
+          >
+            <option *ngIf="editForm.get(['projet'])!.value == null" [ngValue]="null" selected></option>
+            <option [ngValue]="projetOption" *ngFor="let projetOption of projetsSharedCollection">{{ projetOption.id }}</option>
+          </select>
+        </div>
+        <div *ngIf="editForm.get(['projet'])!.invalid && (editForm.get(['projet'])!.dirty || editForm.get(['projet'])!.touched)">
+          <small class="form-text text-danger" *ngIf="editForm.get(['projet'])?.errors?.required" jhiTranslate="entity.validation.required">
+            هذا الحقل مطلوب.
+          </small>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">الغاء</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">حفظ</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

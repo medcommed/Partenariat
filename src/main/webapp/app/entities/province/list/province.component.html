@@ -1,0 +1,141 @@
+<div>
+  <h2 id="page-heading" data-cy="ProvinceHeading">
+    <span jhiTranslate="partenariatApp.province.home.title">Provinces</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="partenariatApp.province.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-province"
+        [routerLink]="['/province/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="partenariatApp.province.home.createLabel"> Create a new Province </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <jhi-filter [filters]="filters"></jhi-filter>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="provinces?.length === 0">
+    <span jhiTranslate="partenariatApp.province.home.notFound">No Provinces found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="provinces && provinces.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="global.field.id">ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="libelleProvinceAr">
+            <div class="d-flex">
+              <span jhiTranslate="partenariatApp.province.libelleProvinceAr">Libelle Province Ar</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="libelleProvinceFr">
+            <div class="d-flex">
+              <span jhiTranslate="partenariatApp.province.libelleProvinceFr">Libelle Province Fr</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="region.libelleRegionAr">
+            <div class="d-flex">
+              <span jhiTranslate="partenariatApp.province.region">Region</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let province of provinces; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/province', province.id, 'view']">{{ province.id }}</a>
+          </td>
+          <td>{{ province.libelleProvinceAr }}</td>
+          <td>{{ province.libelleProvinceFr }}</td>
+          <td>
+            <div *ngIf="province.region">
+              <a [routerLink]="['/region', province.region.id, 'view']">{{ province.region.libelleRegionAr }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/commune']"
+                [queryParams]="{ 'filter[provincesId.in]': province.id }"
+                class="btn btn-info btn-sm"
+                data-cy="filterOtherEntityButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span
+                  class="d-none d-md-inline"
+                  jhiTranslate="entity.action.show"
+                  [translateValues]="{ otherEntity: ('partenariatApp.province.commune' | translate) }"
+                  >Show Commune</span
+                >
+              </button>
+              <button
+                type="submit"
+                [routerLink]="['/province', province.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">عرض</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/province', province.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">تعديل</span>
+              </button>
+
+              <button type="submit" (click)="delete(province)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">حذف</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="provinces && provinces.length > 0">
+    <div class="d-flex justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [page]="page"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="navigateToPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>
