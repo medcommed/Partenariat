@@ -1,0 +1,33 @@
+{
+  "partenariatApp": {
+    "convention": {
+      "home": {
+        "title": "Conventions",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Convention",
+        "createOrEditLabel": "Create or edit a Convention",
+        "notFound": "No Conventions found"
+      },
+      "created": "A new Convention is created with identifier {{ param }}",
+      "updated": "A Convention is updated with identifier {{ param }}",
+      "deleted": "A Convention is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Convention {{ id }}?"
+      },
+      "detail": {
+        "title": "Convention"
+      },
+      "id": "ID",
+      "aveanau": "Aveanau",
+      "dateDebutConv": "Date Debut Conv",
+      "dureeConvention": "Duree Convention",
+      "etatConvention": "Etat Convention",
+      "nbrTranche": "Nbr Tranche",
+      "nomConvention": "Nom Convention",
+      "objectif": "Objectif",
+      "projet": "Projet",
+      "typeConvention": "Type Convention",
+      "partenaire": "Partenaire"
+    }
+  }
+}

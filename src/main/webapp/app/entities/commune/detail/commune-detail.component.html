@@ -1,0 +1,42 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="commune">
+      <h2 data-cy="communeDetailsHeading"><span jhiTranslate="partenariatApp.commune.detail.title">Commune</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ commune.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="partenariatApp.commune.nomCommuneAr">Nom Commune Ar</span></dt>
+        <dd>
+          <span>{{ commune.nomCommuneAr }}</span>
+        </dd>
+        <dt><span jhiTranslate="partenariatApp.commune.nomCommuneFr">Nom Commune Fr</span></dt>
+        <dd>
+          <span>{{ commune.nomCommuneFr }}</span>
+        </dd>
+        <dt><span jhiTranslate="partenariatApp.commune.provinces">Provinces</span></dt>
+        <dd>
+          <div *ngIf="commune.provinces">
+            <a [routerLink]="['/province', commune.provinces.id, 'view']">{{ commune.provinces.libelleProvinceAr }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">رجوع</span>
+      </button>
+
+      <button type="button" [routerLink]="['/commune', commune.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">تعديل</span>
+      </button>
+    </div>
+  </div>
+</div>

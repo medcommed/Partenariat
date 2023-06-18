@@ -1,0 +1,28 @@
+{
+  "partenariatApp": {
+    "tranche": {
+      "home": {
+        "title": "Tranches",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Tranche",
+        "createOrEditLabel": "Create or edit a Tranche",
+        "notFound": "No Tranches found"
+      },
+      "created": "A new Tranche is created with identifier {{ param }}",
+      "updated": "A Tranche is updated with identifier {{ param }}",
+      "deleted": "A Tranche is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Tranche {{ id }}?"
+      },
+      "detail": {
+        "title": "Tranche"
+      },
+      "id": "ID",
+      "nomTranche": "Nom Tranche",
+      "dateDeffet": "Date Deffet",
+      "montantTranche": "Montant Tranche",
+      "rapportTranche": "Rapport Tranche",
+      "projet": "Projet"
+    }
+  }
+}

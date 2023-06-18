@@ -1,0 +1,26 @@
+{
+  "partenariatApp": {
+    "typeConvention": {
+      "home": {
+        "title": "Type Conventions",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Type Convention",
+        "createOrEditLabel": "Create or edit a Type Convention",
+        "notFound": "No Type Conventions found"
+      },
+      "created": "A new Type Convention is created with identifier {{ param }}",
+      "updated": "A Type Convention is updated with identifier {{ param }}",
+      "deleted": "A Type Convention is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Type Convention {{ id }}?"
+      },
+      "detail": {
+        "title": "Type Convention"
+      },
+      "id": "ID",
+      "nomTypeAr": "Nom Type Ar",
+      "nomTypeFr": "Nom Type Fr",
+      "convention": "Convention"
+    }
+  }
+}

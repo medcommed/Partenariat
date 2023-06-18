@@ -1,0 +1,35 @@
+{
+  "applications": "*",
+  "changelogDate": "20230618043258",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "domaine_projet",
+  "fields": [
+    {
+      "fieldName": "designationAr",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "unique", "maxlength"],
+      "fieldValidateRulesMaxlength": "255"
+    },
+    {
+      "fieldName": "designationFr",
+      "fieldType": "String",
+      "fieldValidateRules": ["unique", "maxlength"],
+      "fieldValidateRulesMaxlength": "255"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": true,
+  "name": "DomaineProjet",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "projet",
+      "otherEntityRelationshipName": "domaineProjet",
+      "relationshipName": "projet",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "serviceClass"
+}

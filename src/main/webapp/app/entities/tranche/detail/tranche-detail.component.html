@@ -1,0 +1,50 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="tranche">
+      <h2 data-cy="trancheDetailsHeading"><span jhiTranslate="partenariatApp.tranche.detail.title">Tranche</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ tranche.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="partenariatApp.tranche.nomTranche">Nom Tranche</span></dt>
+        <dd>
+          <span>{{ tranche.nomTranche }}</span>
+        </dd>
+        <dt><span jhiTranslate="partenariatApp.tranche.dateDeffet">Date Deffet</span></dt>
+        <dd>
+          <span>{{ tranche.dateDeffet | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="partenariatApp.tranche.montantTranche">Montant Tranche</span></dt>
+        <dd>
+          <span>{{ tranche.montantTranche }}</span>
+        </dd>
+        <dt><span jhiTranslate="partenariatApp.tranche.rapportTranche">Rapport Tranche</span></dt>
+        <dd>
+          <span>{{ tranche.rapportTranche }}</span>
+        </dd>
+        <dt><span jhiTranslate="partenariatApp.tranche.projet">Projet</span></dt>
+        <dd>
+          <div *ngIf="tranche.projet">
+            <a [routerLink]="['/projet', tranche.projet.id, 'view']">{{ tranche.projet.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">رجوع</span>
+      </button>
+
+      <button type="button" [routerLink]="['/tranche', tranche.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">تعديل</span>
+      </button>
+    </div>
+  </div>
+</div>

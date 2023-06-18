@@ -1,0 +1,99 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-region-heading" data-cy="RegionCreateUpdateHeading" jhiTranslate="partenariatApp.region.home.createOrEditLabel">
+        Create or edit a Region
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="partenariatApp.region.libelleRegionAr" for="field_libelleRegionAr"
+            >Libelle Region Ar</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="libelleRegionAr"
+            id="field_libelleRegionAr"
+            data-cy="libelleRegionAr"
+            formControlName="libelleRegionAr"
+          />
+          <div
+            *ngIf="
+              editForm.get('libelleRegionAr')!.invalid &&
+              (editForm.get('libelleRegionAr')!.dirty || editForm.get('libelleRegionAr')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('libelleRegionAr')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              هذا الحقل مطلوب.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('libelleRegionAr')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 255 }"
+            >
+              هذا الحقل لا يمكن أن يكون أطول من 255 احرف.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="partenariatApp.region.libelleRegionFr" for="field_libelleRegionFr"
+            >Libelle Region Fr</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="libelleRegionFr"
+            id="field_libelleRegionFr"
+            data-cy="libelleRegionFr"
+            formControlName="libelleRegionFr"
+          />
+          <div
+            *ngIf="
+              editForm.get('libelleRegionFr')!.invalid &&
+              (editForm.get('libelleRegionFr')!.dirty || editForm.get('libelleRegionFr')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('libelleRegionFr')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 255 }"
+            >
+              هذا الحقل لا يمكن أن يكون أطول من 255 احرف.
+            </small>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">الغاء</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">حفظ</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

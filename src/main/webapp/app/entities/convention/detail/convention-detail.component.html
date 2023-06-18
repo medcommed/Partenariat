@@ -1,0 +1,75 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="convention">
+      <h2 data-cy="conventionDetailsHeading"><span jhiTranslate="partenariatApp.convention.detail.title">Convention</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ convention.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="partenariatApp.convention.aveanau">Aveanau</span></dt>
+        <dd>
+          <span>{{ convention.aveanau }}</span>
+        </dd>
+        <dt><span jhiTranslate="partenariatApp.convention.dateDebutConv">Date Debut Conv</span></dt>
+        <dd>
+          <span>{{ convention.dateDebutConv | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="partenariatApp.convention.dureeConvention">Duree Convention</span></dt>
+        <dd>
+          <span>{{ convention.dureeConvention }}</span>
+        </dd>
+        <dt><span jhiTranslate="partenariatApp.convention.etatConvention">Etat Convention</span></dt>
+        <dd>
+          <span>{{ convention.etatConvention }}</span>
+        </dd>
+        <dt><span jhiTranslate="partenariatApp.convention.nbrTranche">Nbr Tranche</span></dt>
+        <dd>
+          <span>{{ convention.nbrTranche }}</span>
+        </dd>
+        <dt><span jhiTranslate="partenariatApp.convention.nomConvention">Nom Convention</span></dt>
+        <dd>
+          <span>{{ convention.nomConvention }}</span>
+        </dd>
+        <dt><span jhiTranslate="partenariatApp.convention.objectif">Objectif</span></dt>
+        <dd>
+          <span>{{ convention.objectif }}</span>
+        </dd>
+        <dt><span jhiTranslate="partenariatApp.convention.projet">Projet</span></dt>
+        <dd>
+          <div *ngIf="convention.projet">
+            <a [routerLink]="['/projet', convention.projet.id, 'view']">{{ convention.projet.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="partenariatApp.convention.typeConvention">Type Convention</span></dt>
+        <dd>
+          <div *ngIf="convention.typeConvention">
+            <a [routerLink]="['/type-convention', convention.typeConvention.id, 'view']">{{ convention.typeConvention.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="partenariatApp.convention.partenaire">Partenaire</span></dt>
+        <dd>
+          <span *ngFor="let partenaire of convention.partenaires; let last = last">
+            <a [routerLink]="['/partenaire', partenaire.id, 'view']">{{ partenaire.id }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">رجوع</span>
+      </button>
+
+      <button type="button" [routerLink]="['/convention', convention.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">تعديل</span>
+      </button>
+    </div>
+  </div>
+</div>

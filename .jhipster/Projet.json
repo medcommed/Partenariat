@@ -1,0 +1,76 @@
+{
+  "applications": "*",
+  "changelogDate": "20230618043300",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "projet",
+  "fields": [
+    {
+      "fieldName": "nomProjet",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "255"
+    },
+    {
+      "fieldName": "anneeProjet",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "dateDebut",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "dureeProjet",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "montantProjet",
+      "fieldType": "BigDecimal",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": true,
+  "name": "Projet",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "nomCommuneAr",
+      "otherEntityName": "commune",
+      "otherEntityRelationshipName": "projet",
+      "relationshipName": "comune",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "designationAr",
+      "otherEntityName": "domaineProjet",
+      "otherEntityRelationshipName": "projet",
+      "relationshipName": "domaineProjet",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "convention",
+      "otherEntityRelationshipName": "projet",
+      "relationshipName": "convention",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "situationProjet",
+      "otherEntityRelationshipName": "projet",
+      "relationshipName": "situationProjet",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityField": "dateDeffet",
+      "otherEntityName": "tranche",
+      "otherEntityRelationshipName": "projet",
+      "relationshipName": "tranche",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "serviceClass"
+}

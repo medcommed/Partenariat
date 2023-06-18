@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--
+        Added the constraints for entity Convention.
+    -->
+    <changeSet id="20230618043257-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="projet_id"
+                                 baseTableName="convention"
+                                 constraintName="fk_convention__projet_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="projet"/>
+
+        <addForeignKeyConstraint baseColumnNames="type_convention_id"
+                                 baseTableName="convention"
+                                 constraintName="fk_convention__type_convention_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="type_convention"/>
+
+        <addForeignKeyConstraint baseColumnNames="convention_id"
+                                 baseTableName="rel_convention__partenaire"
+                                 constraintName="fk_rel_convention__partenaire__convention_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="convention"/>
+
+        <addForeignKeyConstraint baseColumnNames="partenaire_id"
+                                 baseTableName="rel_convention__partenaire"
+                                 constraintName="fk_rel_convention__partenaire__partenaire_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="partenaire"/>
+    </changeSet>
+</databaseChangeLog>

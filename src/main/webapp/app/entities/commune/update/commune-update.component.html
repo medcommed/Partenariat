@@ -1,0 +1,106 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-commune-heading" data-cy="CommuneCreateUpdateHeading" jhiTranslate="partenariatApp.commune.home.createOrEditLabel">
+        Create or edit a Commune
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="partenariatApp.commune.nomCommuneAr" for="field_nomCommuneAr">Nom Commune Ar</label>
+          <input
+            type="text"
+            class="form-control"
+            name="nomCommuneAr"
+            id="field_nomCommuneAr"
+            data-cy="nomCommuneAr"
+            formControlName="nomCommuneAr"
+          />
+          <div
+            *ngIf="editForm.get('nomCommuneAr')!.invalid && (editForm.get('nomCommuneAr')!.dirty || editForm.get('nomCommuneAr')!.touched)"
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('nomCommuneAr')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              هذا الحقل مطلوب.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('nomCommuneAr')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 255 }"
+            >
+              هذا الحقل لا يمكن أن يكون أطول من 255 احرف.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="partenariatApp.commune.nomCommuneFr" for="field_nomCommuneFr">Nom Commune Fr</label>
+          <input
+            type="text"
+            class="form-control"
+            name="nomCommuneFr"
+            id="field_nomCommuneFr"
+            data-cy="nomCommuneFr"
+            formControlName="nomCommuneFr"
+          />
+          <div
+            *ngIf="editForm.get('nomCommuneFr')!.invalid && (editForm.get('nomCommuneFr')!.dirty || editForm.get('nomCommuneFr')!.touched)"
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('nomCommuneFr')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 255 }"
+            >
+              هذا الحقل لا يمكن أن يكون أطول من 255 احرف.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="partenariatApp.commune.provinces" for="field_provinces">Provinces</label>
+          <select
+            class="form-control"
+            id="field_provinces"
+            data-cy="provinces"
+            name="provinces"
+            formControlName="provinces"
+            [compareWith]="compareProvince"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="provinceOption" *ngFor="let provinceOption of provincesSharedCollection">
+              {{ provinceOption.libelleProvinceAr }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">الغاء</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">حفظ</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
